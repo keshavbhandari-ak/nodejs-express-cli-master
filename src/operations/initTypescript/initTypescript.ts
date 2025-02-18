@@ -1,6 +1,7 @@
 import path from "path";
 import CommandLineService from "../../services/commandLineService";
 import FileHandlerService from "../../services/FileHandlerService";
+import { FileType } from "../../types";
 
 const installTypescriptDependencies = async () => {
     try {
@@ -24,7 +25,7 @@ const createTsConfigJson = () => {
     };
     const filePath = path.join(process.cwd(), "tsconfig.json");
     const fileHandler = FileHandlerService.getInstance();
-    fileHandler.writeFile(tsConfig, filePath);
+    fileHandler.writeFile(tsConfig, filePath, FileType.JSON);
 };
 
 export async function initializeTypescript() {

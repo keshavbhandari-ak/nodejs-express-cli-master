@@ -4,6 +4,7 @@ import { ProjectDetailsConfig } from "../../types";
 import CommandLineService from "../../services/commandLineService";
 import { initializeTypescript } from "../initTypescript";
 import { generatePackageJson } from "../initPackageJson";
+import { initGit } from "../initGit";
 
 const createProjectDirectory = async (projectName: string) => {
     const currentDir = process.cwd();
@@ -21,6 +22,7 @@ export async function generateProject(projectDetails: ProjectDetailsConfig) {
     const { projectName } = projectDetails;
     const projectDirectory = await createProjectDirectory(projectName);
     process.chdir(projectDirectory);
+    await initGit();
     await generatePackageJson();
     await initializeTypescript();
 }

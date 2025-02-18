@@ -1,5 +1,6 @@
 import fs from "fs-extra";
 import path from "path";
+import { FileType } from "../types";
 
 class FileHandlerService {
     private static instance: FileHandlerService;
@@ -13,9 +14,13 @@ class FileHandlerService {
         return FileHandlerService.instance;
     }
 
-    writeFile(fileContent: string | Record<string, any>, filePath: string) {
+    writeFile(fileContent: any, filePath: string, fileType: string) {
         try {
-            fs.writeFileSync(filePath, JSON.stringify(fileContent, null, 2));
+            if (fileType === FileType.JSON) {
+                fs.writeFileSync(filePath, JSON.stringify(fileContent, null, 2));
+            } else if (fileType === FileType.TEXT) {
+                fs.writeFileSync(filePath, fileContent, { encoding: "utf8" });
+            }
             console.log(`${filePath} has been created successfully!`);
         } catch (err) {
             console.error(`Error writing ${filePath}:`, err);
