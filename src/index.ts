@@ -1,20 +1,15 @@
 #!/usr/bin/env node
 
-import fs from "fs-extra";
-// import inquirer from "inquirer";
-// import chalk from "chalk";
-import path from "path";
+import { generateProject } from "./operations/projectGenerator";
+import { getProjectName } from "./questions";
 
 async function main() {
-    const currentDir = process.cwd();
-    const testProjectDir = path.join(currentDir, 'Test-Project');
+    const projectName = await getProjectName();
+    const projectDetails = {
+        projectName
+    };
 
-    try {
-        await fs.ensureDir(testProjectDir);
-        console.log(`'Test-Project' folder created at   : ${testProjectDir}`);
-      } catch (err) {
-        console.error('Error:', err);
-    }
+    generateProject(projectDetails);
 }
 
 main();
