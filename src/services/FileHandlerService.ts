@@ -26,6 +26,19 @@ class FileHandlerService {
             console.error(`Error writing ${filePath}:`, err);
         }
     }
+
+    readFile(filePath: string, fileType: string) {
+        try {
+            const data = fs.readFileSync(filePath, "utf8");
+            if (fileType === FileType.JSON) {
+                return JSON.parse(data);
+            } else {
+                return data;
+            }
+        } catch {
+            console.log(`Error Reading ${filePath}`);
+        }
+    }
 }
 
 export default FileHandlerService;
