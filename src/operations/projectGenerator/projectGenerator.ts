@@ -1,10 +1,10 @@
 import fs from "fs-extra";
 import path from "path";
 import { ProjectDetailsConfig } from "../../types";
-import CommandLineService from "../../services/commandLineService";
 import { initializeTypescript } from "../initTypescript";
 import { generatePackageJson } from "../initPackageJson";
 import { initGit } from "../initGit";
+import { setupExpressServer } from "../setupExpressServer";
 
 const createProjectDirectory = async (projectName: string) => {
     const currentDir = process.cwd();
@@ -25,4 +25,5 @@ export async function generateProject(projectDetails: ProjectDetailsConfig) {
     await initGit();
     await generatePackageJson();
     await initializeTypescript();
+    await setupExpressServer();
 }
