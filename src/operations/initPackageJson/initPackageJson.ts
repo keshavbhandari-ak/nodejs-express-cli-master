@@ -2,10 +2,13 @@ import path from "path";
 import CommandLineService from "../../services/commandLineService";
 import FileHandlerService from "../../services/FileHandlerService";
 import { FileType } from "../../types";
+import ProjectMetadataService from "../../services/projectMetadataService";
 
 async function initPackageJson() {
     const commandLineObj = CommandLineService.getInstance();
-    await commandLineObj.executeCommand("npm", ["init", "-y"]);
+    const projectMetadataServiceObj = ProjectMetadataService.getInstance();
+    const command = projectMetadataServiceObj.getPackageManager();
+    await commandLineObj.executeCommand(command, ["init", "-y"]);
 }
 
 function updateScriptsInPackageJson() {

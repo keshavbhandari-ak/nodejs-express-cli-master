@@ -6,7 +6,7 @@ import { FileType } from "../../types";
 const installTypescriptDependencies = async () => {
     try {
         const commandLineObj = CommandLineService.getInstance();
-        await commandLineObj.executeCommand("npm", ["install", "--save-dev", "typescript", "ts-node", "@types/node"]);
+        await commandLineObj.installDependencies(["typescript", "ts-node", "@types/node"], true);
     } catch (error) {
         console.error("Error:", error);
     }

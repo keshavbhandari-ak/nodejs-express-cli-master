@@ -1,5 +1,8 @@
-import { input } from "@inquirer/prompts";
+import { input, select } from "@inquirer/prompts";
 import { spawn } from "child_process";
+import { Choice, PackageManager } from "../types";
+import ProjectMetadataService from "./projectMetadataService";
+const projectMetadataServiceObj = ProjectMetadataService.getInstance();
 
 class CommandLineService {
     private static instance: CommandLineService;
@@ -20,6 +23,14 @@ class CommandLineService {
         });
     }
 
+    async getChoiceFromUser(message: string, choices: Choice[]) {
+        const selectedChoice = await select({
+            message,
+            choices
+        });
+        return selectedChoice || choices[0].value;
+    }
+
     async executeCommand(command: string, args: string[]) {
         return new Promise<void>((resolve, reject) => {
             const npmInit = spawn(command, args);
@@ -34,6 +45,19 @@ class CommandLineService {
                 }
             });
         });
+    }
+
+    async installDependencies(dependencies: string[], isDevDependency: boolean = false) {
+        const packageManager = projectMetadataServiceObj.getPackageManager();
+        let args: string[] = [];
+        if (packageManager === PackageManager.NPM) {
+            args = ["install", ...(isDevDependency ? ["--save-dev"] : []), ...dependencies];
+        } else if (packageManager === PackageManager.YARN) {
+            args = ["add", ...(isDevDependency ? ["--dev"] : []), ...dependencies];
+        } else if (packageManager === PackageManager.PNPM) {
+            args = ["add", ...(isDevDependency ? ["--save-dev"] : []), ...dependencies];
+        }
+        await this.executeCommand(packageManager, args);
     }
 }
 

@@ -57,8 +57,8 @@ function createConfigFile() {
 
 async function installExpress() {
     const commandLineObj = CommandLineService.getInstance();
-    await commandLineObj.executeCommand("npm", ["install", "express"]);
-    await commandLineObj.executeCommand("npm", ["install", "--save-dev", "@types/express"]);
+    await commandLineObj.installDependencies(["express"]);
+    await commandLineObj.installDependencies(["@types/express"], true);
 }
 
 export async function setupExpressServer() {
