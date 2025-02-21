@@ -8,6 +8,7 @@ import ProjectMetadataService from "../../services/projectMetadataService";
 import { infoLog } from "../../utils/logger";
 import Messages from "../../constants/messages";
 import { configureDotenv } from "../configureDotenv";
+import { configureEsLint } from "../configureEsLint";
 
 const createProjectDirectory = async (projectName: string) => {
     const currentDir = process.cwd();
@@ -30,6 +31,7 @@ export async function generateProject() {
     await generatePackageJson();
     await initializeTypescript();
     await configureDotenv();
+    await configureEsLint();
     await setupExpressServer();
     infoLog(Messages.boilerPlateSuccess);
 }
