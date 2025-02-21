@@ -51,12 +51,6 @@ function createAppFile() {
     fileHandler.writeFile(appFileContent, filePath, FileType.TEXT);
 }
 
-function createConfigFile() {
-    createDirectories("src");
-    const filePath = path.join(process.cwd(), "src", "config.ts");
-    fileHandler.writeFile(configFileContent, filePath, FileType.TEXT);
-}
-
 async function installExpress() {
     const commandLineObj = CommandLineService.getInstance();
     await commandLineObj.installDependencies(["express"]);
@@ -66,7 +60,6 @@ async function installExpress() {
 export async function setupExpressServer() {
     infoLog(Messages.creatingExpressServer);
     await installExpress();
-    createConfigFile();
     createAppFile();
     createControllersFile();
     createModelsFile();

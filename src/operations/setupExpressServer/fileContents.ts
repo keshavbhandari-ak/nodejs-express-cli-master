@@ -4,9 +4,8 @@ export const configFileContent = `export const config = {
 `;
 
 export const serverFileContent = `import app from "./src/app";
-import { config } from "./src/config";
 
-const PORT = config.PORT || 5000;
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(\`🚀 Server running on http://localhost:\${PORT}\`);
@@ -15,6 +14,10 @@ app.listen(PORT, () => {
 
 export const appFileContent = `import express, { Application, Request, Response } from "express";
 import userRoutes from "./routes/user.routes";
+import dotenv from "dotenv";
+
+const envFile = \`.env.\${process.env.NODE_ENV || "development"}\`;
+dotenv.config({ path: envFile });
 
 const app: Application = express();
 

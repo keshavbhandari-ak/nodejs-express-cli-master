@@ -6,7 +6,8 @@ const Messages = {
     generatePackgeJson: "Generating package.json",
     installingTypescriptDependencies: "Installing Typescript Dependencies",
     creatingExpressServer: "Creating Express Server",
-    boilerPlateSuccess: "NodeJS-Express Project Boiler Plate Generated Successfully"
+    boilerPlateSuccess: "NodeJS-Express Project Boiler Plate Generated Successfully",
+    configuringDotEnvFiles: "Configuring .env Files"
 };
 
 export default Messages;
