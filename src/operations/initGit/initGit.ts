@@ -2,6 +2,8 @@ import path from "path";
 import CommandLineService from "../../services/commandLineService";
 import FileHandlerService from "../../services/FileHandlerService";
 import { FileType } from "../../types";
+import { infoLog } from "../../utils/logger";
+import Messages from "../../constants/messages";
 
 const gitIgnoreConfig = `# Node modules
 /node_modules/
@@ -68,6 +70,7 @@ const generateGitIgnore = () => {
 };
 
 export async function initGit() {
+    infoLog(Messages.initializeGit);
     await initializeGitForProject();
     generateGitIgnore();
 }

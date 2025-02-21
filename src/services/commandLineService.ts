@@ -2,6 +2,7 @@ import { input, select } from "@inquirer/prompts";
 import { spawn } from "child_process";
 import { Choice, PackageManager } from "../types";
 import ProjectMetadataService from "./projectMetadataService";
+import { debugLog } from "../utils/logger";
 const projectMetadataServiceObj = ProjectMetadataService.getInstance();
 
 class CommandLineService {
@@ -38,7 +39,7 @@ class CommandLineService {
             npmInit.on("close", (code: number) => {
                 const commandString = `${command} ${args.join(" ")}`;
                 if (code === 0) {
-                    console.log(`${commandString} process completed successfully`);
+                    debugLog(`${commandString} process completed successfully`);
                     resolve();
                 } else {
                     reject(new Error(`${commandString} process exited with code ${code}`));

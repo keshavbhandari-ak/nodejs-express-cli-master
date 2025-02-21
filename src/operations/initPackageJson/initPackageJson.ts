@@ -3,6 +3,8 @@ import CommandLineService from "../../services/commandLineService";
 import FileHandlerService from "../../services/FileHandlerService";
 import { FileType } from "../../types";
 import ProjectMetadataService from "../../services/projectMetadataService";
+import Messages from "../../constants/messages";
+import { infoLog } from "../../utils/logger";
 
 async function initPackageJson() {
     const commandLineObj = CommandLineService.getInstance();
@@ -24,6 +26,7 @@ function updateScriptsInPackageJson() {
 
 export async function generatePackageJson() {
     try {
+        infoLog(Messages.generatePackgeJson);
         await initPackageJson();
         updateScriptsInPackageJson();
     } catch (error) {

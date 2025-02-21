@@ -2,6 +2,8 @@ import path from "path";
 import CommandLineService from "../../services/commandLineService";
 import FileHandlerService from "../../services/FileHandlerService";
 import { FileType } from "../../types";
+import { infoLog } from "../../utils/logger";
+import Messages from "../../constants/messages";
 
 const installTypescriptDependencies = async () => {
     try {
@@ -29,6 +31,7 @@ const createTsConfigJson = () => {
 };
 
 export async function initializeTypescript() {
+    infoLog(Messages.installingTypescriptDependencies);
     await installTypescriptDependencies();
     createTsConfigJson();
 }

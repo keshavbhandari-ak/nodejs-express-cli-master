@@ -1,5 +1,6 @@
 import path from "path";
 import fs from "fs-extra";
+import { debugLog } from "../logger";
 
 function createDirectories(dirPath: string) {
     const parts = dirPath.split(path.sep);
@@ -13,7 +14,7 @@ function createDirectories(dirPath: string) {
         // If it doesn't exist, create it
         if (!fs.existsSync(currentPath)) {
             fs.mkdirSync(currentPath);
-            console.log(`Created directory: ${currentPath}`);
+            debugLog(`Created directory: ${currentPath}`);
         }
     });
 }

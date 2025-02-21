@@ -1,6 +1,7 @@
 import fs from "fs-extra";
 import path from "path";
 import { FileType } from "../types";
+import { debugLog } from "../utils/logger";
 
 class FileHandlerService {
     private static instance: FileHandlerService;
@@ -21,7 +22,7 @@ class FileHandlerService {
             } else if (fileType === FileType.TEXT) {
                 fs.writeFileSync(filePath, fileContent, { encoding: "utf8" });
             }
-            console.log(`${filePath} has been created successfully!`);
+            debugLog(`${filePath} has been created successfully!`);
         } catch (err) {
             console.error(`Error writing ${filePath}:`, err);
         }

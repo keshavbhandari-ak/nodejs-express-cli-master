@@ -5,13 +5,15 @@ import { generatePackageJson } from "../initPackageJson";
 import { initGit } from "../initGit";
 import { setupExpressServer } from "../setupExpressServer";
 import ProjectMetadataService from "../../services/projectMetadataService";
+import { infoLog } from "../../utils/logger";
+import Messages from "../../constants/messages";
 
 const createProjectDirectory = async (projectName: string) => {
     const currentDir = process.cwd();
     const projectDirectory = path.join(currentDir, projectName);
     try {
+        infoLog(`${Messages.generatingProject} ${projectName}`);
         await fs.ensureDir(projectDirectory);
-        console.log(`${projectName} folder created at: ${projectDirectory}`);
     } catch (err) {
         console.error("Error:", err);
     }
@@ -27,4 +29,5 @@ export async function generateProject() {
     await generatePackageJson();
     await initializeTypescript();
     await setupExpressServer();
+    infoLog(Messages.boilerPlateSuccess);
 }

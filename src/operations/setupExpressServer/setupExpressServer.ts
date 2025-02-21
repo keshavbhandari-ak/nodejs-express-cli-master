@@ -12,6 +12,8 @@ import {
     servicesFileContent
 } from "./fileContents";
 import { createDirectories } from "../../utils/fileSystem";
+import { infoLog } from "../../utils/logger";
+import Messages from "../../constants/messages";
 const fileHandler = FileHandlerService.getInstance();
 
 function createServerFile() {
@@ -62,6 +64,7 @@ async function installExpress() {
 }
 
 export async function setupExpressServer() {
+    infoLog(Messages.creatingExpressServer);
     await installExpress();
     createConfigFile();
     createAppFile();
