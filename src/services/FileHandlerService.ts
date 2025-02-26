@@ -1,5 +1,4 @@
 import fs from "fs-extra";
-import path from "path";
 import { FileType } from "../types";
 import { debugLog } from "../utils/logger";
 
@@ -15,12 +14,12 @@ class FileHandlerService {
         return FileHandlerService.instance;
     }
 
-    writeFile(fileContent: any, filePath: string, fileType: string) {
+    writeFile(fileContent: object | string, filePath: string, fileType: string) {
         try {
             if (fileType === FileType.JSON) {
                 fs.writeFileSync(filePath, JSON.stringify(fileContent, null, 2));
             } else if (fileType === FileType.TEXT) {
-                fs.writeFileSync(filePath, fileContent, { encoding: "utf8" });
+                fs.writeFileSync(filePath, fileContent as string, { encoding: "utf8" });
             }
             debugLog(`${filePath} has been created successfully!`);
         } catch (err) {

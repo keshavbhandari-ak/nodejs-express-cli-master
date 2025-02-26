@@ -4,7 +4,6 @@ import FileHandlerService from "../../services/FileHandlerService";
 import { FileType } from "../../types";
 import {
     appFileContent,
-    configFileContent,
     controllersFileContent,
     modelsFileContent,
     routesFileContent,
