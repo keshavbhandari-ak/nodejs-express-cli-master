@@ -8,7 +8,8 @@ const Messages = {
     creatingExpressServer: "Creating Express Server",
     boilerPlateSuccess: "NodeJS-Express Project Boiler Plate Generated Successfully",
     configuringDotEnvFiles: "Configuring .env Files",
-    configuringEsLint: "Configuring ES Lint"
+    configuringEsLint: "Configuring ES Lint",
+    configuringPrettier: "Configuring Prettier"
 };
 
 export default Messages;

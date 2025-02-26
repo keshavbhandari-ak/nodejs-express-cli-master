@@ -19,8 +19,10 @@ function updateScriptsInPackageJson() {
     const packageJson = fileHandlerObj.readFile(packageJsonPath, FileType.JSON);
     packageJson.scripts = {
         ...packageJson.scripts,
+        build: "tsc",
         start: "npx ts-node server.ts"
     };
+    packageJson.main = "dist/server.js";
     fileHandlerObj.writeFile(packageJson, packageJsonPath, FileType.JSON);
 }
 

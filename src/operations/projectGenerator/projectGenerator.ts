@@ -9,6 +9,7 @@ import { infoLog } from "../../utils/logger";
 import Messages from "../../constants/messages";
 import { configureDotenv } from "../configureDotenv";
 import { configureEsLint } from "../configureEsLint";
+import { configurePrettier } from "../configurePrettier/configurePrettier";
 
 const createProjectDirectory = async (projectName: string) => {
     const currentDir = process.cwd();
@@ -32,6 +33,7 @@ export async function generateProject() {
     await initializeTypescript();
     await configureDotenv();
     await configureEsLint();
+    await configurePrettier();
     await setupExpressServer();
     infoLog(Messages.boilerPlateSuccess);
 }
